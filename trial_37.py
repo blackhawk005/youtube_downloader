@@ -11,13 +11,13 @@ def progress_Check(stream, chunk, bytes_remaining):
     percent = (100 * (file_size - bytes_remaining)) / file_size
     print("{:00.0f}% downloaded".format(percent))
 
-link = input("Enter your youtube url: ")
+link = input("Enter youtube url: ")
 yt = YouTube(link, on_progress_callback=progress_Check)
 videos = yt.streams
 print()
 print(yt.title)
 print()
-n = {}
+
 
 
 
