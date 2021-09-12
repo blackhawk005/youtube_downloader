@@ -10,14 +10,21 @@ def file_path():
     home = os.path.expanduser('~')
     download_path = os.path.join(home, 'Downloads')
     return download_path
-def progress_Check(stream, chunk, bytes_remaining):
-    # Gets the percentage of the file that has been downloaded.
-    percent = (100 * (file_size - bytes_remaining)) / file_size
-    print("{:00.0f}% downloaded".format(percent))
 
+# def progress_Check(stream, chunk, bytes_remaining):
+#     # Gets the percentage of the file that has been downloaded.
+#     percent = (100 * (file_size - bytes_remaining)) / file_size
+#     print("{:00.0f}% downloaded".format(percent))
+
+# def percent(self, tem, total):
+#         perc = (float(tem) / float(total)) * float(100)
+#         return perc
+
+def progress_function(stream, chunk, file_handle, bytes_remaining):
+    print(round((1-bytes_remaining/video.filesize)*100, 3), '% done...')
 
 link = input("Enter youtube url: ")
-yt = YouTube(link)
+yt = YouTube(link, on_progress_callback=on_progress)
 videos = yt.streams
 print()
 print(yt.title)
@@ -59,9 +66,10 @@ file_size = dn_video.filesize
 # t1 = threading.Thread(target=download)
 # t1.start()
 #
-for i in tqdm(range(int(20))):
-    dn_video.download(file_path())
-    time.sleep(0.5)
+dn_video.download(file_path())
+# for i in tqdm(range(int(100))):
+#     dn_video.download(file_path())
+#     time.sleep(0.05)
 
 print("Downloaded successfully")
 
